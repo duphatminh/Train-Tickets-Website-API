@@ -46,9 +46,9 @@ public class DbInitializer
          
          if (context.Trains.Any()) return;
          
-         var trains = new List<Trains>
+         var trains = new List<TrainDetailsModel>
          {
-             new Trains()
+             new TrainDetailsModel()
              {
                  stationID = stations[0].stationID,
                  trainName = "SE1",
@@ -58,7 +58,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new Trains()
+             new TrainDetailsModel()
              {
                  stationID = stations[1].stationID,
                  trainName = "SE2",
@@ -68,7 +68,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new Trains()
+             new TrainDetailsModel()
              {
                  stationID = stations[1].stationID,
                  trainName = "SE3",
@@ -78,7 +78,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new Trains()
+             new TrainDetailsModel()
              {
                  stationID = stations[2].stationID,
                  trainName = "SE4",
@@ -88,7 +88,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new Trains()
+             new TrainDetailsModel()
              {
                  stationID = stations[2].stationID,
                  trainName = "SE5",
@@ -98,7 +98,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new Trains()
+             new TrainDetailsModel()
              {
                  stationID = stations[3].stationID,
                  trainName = "SE6",
@@ -108,7 +108,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new Trains()
+             new TrainDetailsModel()
              {
                  stationID = stations[3].stationID,
                  trainName = "SE7",
@@ -118,7 +118,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new Trains()
+             new TrainDetailsModel()
              {
                  stationID = stations[4].stationID,
                  trainName = "SE8",

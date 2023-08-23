@@ -16,4 +16,5 @@ public class Cabins
     public virtual Carriages Carriages { get; set; }
     
     public virtual ICollection<Seats> Seats { get; set; }
+    
 }

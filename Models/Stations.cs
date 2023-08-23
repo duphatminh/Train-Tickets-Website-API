@@ -11,5 +11,5 @@ public class Stations
     public string stationName { get; set; }
     public string stationLocation { get; set; }
     
-    public virtual ICollection<Trains> Trains { get; set; }
+    public virtual ICollection<TrainDetailsModel> Trains { get; set; }
 }

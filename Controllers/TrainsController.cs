@@ -53,16 +53,24 @@ namespace TrainTicketsWebsite.Controllers
         
         // POST: api/TrainControllers
         [HttpPost]
-        public async Task<IActionResult> CreateTrain([FromBody] Trains trains)
+        public async Task<IActionResult> CreateTrain([FromBody] CreateTrainModel createTrainModel)
         {
-            _context.Trains.Add(trains);
+            var newTrain = new TrainDetailsModel()
+            {
+                stationID = createTrainModel.stationID,
+                trainName = createTrainModel.trainName,
+                departureStation = createTrainModel.departureStation,
+                arrivalStation = createTrainModel.arrivalStation
+            };
+            
+            _context.Trains.Add(newTrain);
             await _context.SaveChangesAsync();
             return StatusCode(StatusCodes.Status201Created);
         }
 
         // PUT: api/TrainControllers/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTrain(int id, [FromBody] Trains trains)
+        public async Task<IActionResult> UpdateTrain(int id, [FromBody] TrainDetailsModel trainDetailsModel)
         {
             var trainUpdate = await _context.Trains.SingleOrDefaultAsync(ts => ts.trainID == id);
             if (trainUpdate == null)
@@ -71,9 +79,9 @@ namespace TrainTicketsWebsite.Controllers
             }
             else
             {
-                trainUpdate.trainName = trains.trainName;
-                trainUpdate.departureStation = trains.departureStation;
-                trainUpdate.arrivalStation = trains.arrivalStation;
+                trainUpdate.trainName = trainDetailsModel.trainName;
+                trainUpdate.departureStation = trainDetailsModel.departureStation;
+                trainUpdate.arrivalStation = trainDetailsModel.arrivalStation;
                 
                 await _context.SaveChangesAsync();
                 return Ok("Update Success");

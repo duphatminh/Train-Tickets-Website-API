@@ -17,7 +17,8 @@ public class DataContext : DbContext
         optionsBuilder.EnableSensitiveDataLogging();
     }
     
-    public DbSet<Trains> Trains { get; set; }
+    public DbSet<TrainDetailsModel> Trains { get; set; }
+    public DbSet<CreateTrainModel> CreateTrains { get; set; }
     
     public DbSet<Users> Users { get; set; }
     
@@ -34,5 +35,6 @@ public class DataContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<LoginUser>().HasNoKey();
+        modelBuilder.Entity<CreateTrainModel>().HasNoKey();
     }
 }

@@ -15,7 +15,7 @@ public class Carriages
     public string carriageStatus { get; set; }
     
     [ForeignKey("trainID")]
-    public virtual Trains Trains { get; set; } 
+    public virtual TrainDetailsModel TrainDetailsModel { get; set; } 
     
     public virtual ICollection<Cabins> Cabins { get; set; }
 }
