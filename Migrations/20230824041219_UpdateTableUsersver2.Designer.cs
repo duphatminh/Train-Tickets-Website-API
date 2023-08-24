@@ -12,8 +12,8 @@ using TrainTicketsWebsite.Data;
 namespace TrainTicketsWebsite.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230819160236_UpdateLoginUserTable")]
-    partial class UpdateLoginUserTable
+    [Migration("20230824041219_UpdateTableUsersver2")]
+    partial class UpdateTableUsersver2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,19 +77,6 @@ namespace TrainTicketsWebsite.Migrations
                     b.ToTable("Carriages");
                 });
 
-            modelBuilder.Entity("TrainTicketsWebsite.Models.LoginUser", b =>
-                {
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("LoginUsers");
-                });
-
             modelBuilder.Entity("TrainTicketsWebsite.Models.Seats", b =>
                 {
                     b.Property<int>("seatID")
@@ -143,7 +130,7 @@ namespace TrainTicketsWebsite.Migrations
                     b.ToTable("Stations");
                 });
 
-            modelBuilder.Entity("TrainTicketsWebsite.Models.Trains", b =>
+            modelBuilder.Entity("TrainTicketsWebsite.Models.TrainDetailsModel", b =>
                 {
                     b.Property<int>("trainID")
                         .ValueGeneratedOnAdd()
@@ -188,24 +175,22 @@ namespace TrainTicketsWebsite.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("user_ID"));
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("email")
-                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("phoneNumber")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("user_ID");
@@ -226,13 +211,13 @@ namespace TrainTicketsWebsite.Migrations
 
             modelBuilder.Entity("TrainTicketsWebsite.Models.Carriages", b =>
                 {
-                    b.HasOne("TrainTicketsWebsite.Models.Trains", "Trains")
+                    b.HasOne("TrainTicketsWebsite.Models.TrainDetailsModel", "TrainDetailsModel")
                         .WithMany("Carriages")
                         .HasForeignKey("trainID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Trains");
+                    b.Navigation("TrainDetailsModel");
                 });
 
             modelBuilder.Entity("TrainTicketsWebsite.Models.Seats", b =>
@@ -246,7 +231,7 @@ namespace TrainTicketsWebsite.Migrations
                     b.Navigation("Cabins");
                 });
 
-            modelBuilder.Entity("TrainTicketsWebsite.Models.Trains", b =>
+            modelBuilder.Entity("TrainTicketsWebsite.Models.TrainDetailsModel", b =>
                 {
                     b.HasOne("TrainTicketsWebsite.Models.Stations", "Stations")
                         .WithMany("Trains")
@@ -272,7 +257,7 @@ namespace TrainTicketsWebsite.Migrations
                     b.Navigation("Trains");
                 });
 
-            modelBuilder.Entity("TrainTicketsWebsite.Models.Trains", b =>
+            modelBuilder.Entity("TrainTicketsWebsite.Models.TrainDetailsModel", b =>
                 {
                     b.Navigation("Carriages");
                 });

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TrainTicketsWebsite.Data;
 using TrainTicketsWebsite.Models;
+using TrainTicketsWebsite.Utilities;
 
 namespace TrainTicketsWebsite.Controllers;
 
@@ -20,16 +21,19 @@ public class AuthController : Controller
     [HttpPost("register")]
     public async Task<IActionResult> Register(LoginUser loginUser)
     {
+        bool isEmail = ValidationHelper.IsEmail(loginUser.userNameOrEmail);
+        
         if (ModelState.IsValid)
         {
-            if (await _context.Users.AnyAsync(u => u.Username == loginUser.username))
+            if (await _context.Users.AnyAsync(u => (isEmail && u.email == loginUser.userNameOrEmail) || (!isEmail && u.userName == loginUser.userNameOrEmail)))
             {
-                return BadRequest("Username đã tồn tại");
+                return BadRequest("Username hoặc Email đã tồn tại");
             }
-
+            
             var user = new Users
             {
-                Username = loginUser.username,
+                userName = isEmail ? null : loginUser.userNameOrEmail,
+                email = isEmail ? loginUser.userNameOrEmail : null,
                 password = loginUser.password,
                 role = "customer"
             };
@@ -48,7 +52,9 @@ public class AuthController : Controller
     {
         if (ModelState.IsValid)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == loginUser.username);
+            var user = await _context.Users.FirstOrDefaultAsync(u => 
+                (u.userName == loginUser.userNameOrEmail || u.email == loginUser.userNameOrEmail) && 
+                u.password == loginUser.password) ;
             if (user == null)
             {
                 return BadRequest("Tài khoản không tồn tại");

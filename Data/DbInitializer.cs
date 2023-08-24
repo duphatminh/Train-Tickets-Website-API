@@ -535,7 +535,7 @@ public class DbInitializer
          {
              new Users()
              {
-                Username = "duphatminh",
+                userName = "duphatminh",
                 email = "duphatminhh@gmail.com",
                 phoneNumber = "0898489526",
                 password = "123456",
@@ -543,7 +543,7 @@ public class DbInitializer
              },
              new Users()
              {
-                 Username = "minhphatdu",
+                 userName = "minhphatdu",
                  email = "duphatminhhh@gmail.com",
                  phoneNumber = "123454656",
                  password = "123456",
@@ -551,7 +551,7 @@ public class DbInitializer
              },
              new Users()
              {
-                 Username = "phatminhdu",
+                 userName = "phatminhdu",
                  email = "duphatminhhhh@gmail.com",
                  phoneNumber = "5346436456",
                  password = "123456",
@@ -559,7 +559,7 @@ public class DbInitializer
              },
              new Users()
              {
-                 Username = "hihihiihihi",
+                 userName = "hihihiihihi",
                  email = "duphatminhhh@gmail.com",
                  phoneNumber = "1234567689",
                  password = "123456",

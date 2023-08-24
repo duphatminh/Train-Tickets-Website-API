@@ -6,7 +6,7 @@ namespace TrainTicketsWebsite.Models;
 public class LoginUser
 {
     [Required]
-    public string username { get; set; }
+    public string userNameOrEmail { get; set; }
     [Required]
     public string password { get; set; }
 }

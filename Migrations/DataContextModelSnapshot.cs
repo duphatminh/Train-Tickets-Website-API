@@ -74,36 +74,6 @@ namespace TrainTicketsWebsite.Migrations
                     b.ToTable("Carriages");
                 });
 
-            modelBuilder.Entity("TrainTicketsWebsite.Models.CreateTrainModel", b =>
-                {
-                    b.Property<string>("arrivalStation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("departureStation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("stationID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("trainName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("CreateTrains");
-                });
-
-            modelBuilder.Entity("TrainTicketsWebsite.Models.LoginUser", b =>
-                {
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("LoginUsers");
-                });
-
             modelBuilder.Entity("TrainTicketsWebsite.Models.Seats", b =>
                 {
                     b.Property<int>("seatID")
@@ -202,24 +172,22 @@ namespace TrainTicketsWebsite.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("user_ID"));
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("email")
-                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("phoneNumber")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("user_ID");
