@@ -18,11 +18,8 @@ public class DataContext : DbContext
     }
     
     public DbSet<TrainDetailsModel> Trains { get; set; }
-    public DbSet<CreateTrainModel> CreateTrains { get; set; }
     
     public DbSet<Users> Users { get; set; }
-    
-    public DbSet<LoginUser> loginUsers { get; set; }
     
     public DbSet<Carriages> Carriages { get; set; }
     
@@ -32,9 +29,5 @@ public class DataContext : DbContext
     
     public DbSet<Seats> Seats { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<LoginUser>().HasNoKey();
-        modelBuilder.Entity<CreateTrainModel>().HasNoKey();
-    }
+    
 }
