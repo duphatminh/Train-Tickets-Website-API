@@ -10,7 +10,6 @@ public class TrainDetailsModel
     [Required]
     public int stationID { get; set; }
     
-    [Required]
     public string trainName { get; set; }
     public DateTime schedule { get; set; }
     

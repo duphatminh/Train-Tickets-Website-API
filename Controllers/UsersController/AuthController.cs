@@ -21,8 +21,6 @@ public class AuthController : Controller
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterUser registerUser)
     {
-        
-        
         if (ModelState.IsValid)
         {
             if (await _context.Users.AnyAsync(u => (u.userName == registerUser.userName || u.email == registerUser.email)))
@@ -58,12 +56,12 @@ public class AuthController : Controller
             {
                 return BadRequest("Account does not exist");
             }
-
+            
             if (user.password != loginUser.password)
             {
                 return BadRequest("Incorrect password");
             }
-
+            
             return Ok("Logged in successfully");
         }
         return BadRequest("Invalid data");

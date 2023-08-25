@@ -70,7 +70,7 @@ namespace TrainTicketsWebsite.Controllers
 
         // PUT: api/TrainControllers/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTrain(int id, [FromBody] TrainDetailsModel trainDetailsModel)
+        public async Task<IActionResult> UpdateTrain(int id, [FromBody] UpdateTrainModel updateTrainModel)
         {
             var trainUpdate = await _context.Trains.SingleOrDefaultAsync(ts => ts.trainID == id);
             if (trainUpdate == null)
@@ -79,9 +79,10 @@ namespace TrainTicketsWebsite.Controllers
             }
             else
             {
-                trainUpdate.trainName = trainDetailsModel.trainName;
-                trainUpdate.departureStation = trainDetailsModel.departureStation;
-                trainUpdate.arrivalStation = trainDetailsModel.arrivalStation;
+                trainUpdate.departureStation = updateTrainModel.departureStation;
+                trainUpdate.arrivalStation = updateTrainModel.arrivalStation;
+                trainUpdate.departureTime = updateTrainModel.departureTime;
+                trainUpdate.arrivalTime = updateTrainModel.arrivalTime;
                 
                 await _context.SaveChangesAsync();
                 return Ok("Update Success");
