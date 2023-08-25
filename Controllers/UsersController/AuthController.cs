@@ -19,31 +19,31 @@ public class AuthController : Controller
     
     //Đăng ký tài khoản
     [HttpPost("register")]
-    public async Task<IActionResult> Register(LoginUser loginUser)
+    public async Task<IActionResult> Register(RegisterUser registerUser)
     {
-        bool isEmail = ValidationHelper.IsEmail(loginUser.userNameOrEmail);
+        
         
         if (ModelState.IsValid)
         {
-            if (await _context.Users.AnyAsync(u => (isEmail && u.email == loginUser.userNameOrEmail) || (!isEmail && u.userName == loginUser.userNameOrEmail)))
+            if (await _context.Users.AnyAsync(u => (u.userName == registerUser.userName || u.email == registerUser.email)))
             {
-                return BadRequest("Username hoặc Email đã tồn tại");
+                return BadRequest("Username or Email already exists");
             }
             
             var user = new Users
             {
-                userName = isEmail ? null : loginUser.userNameOrEmail,
-                email = isEmail ? loginUser.userNameOrEmail : null,
-                password = loginUser.password,
+                userName = registerUser.userName,
+                email = registerUser.email,
+                password = registerUser.password,
                 role = "customer"
             };
             
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
-            return Ok("Đăng ký thành công");
+            return Ok("Sign Up Success");
 
         }
-        return BadRequest("Dữ liệu không hợp lệ");
+        return BadRequest("Invalid data");
     }
     
     // Đăng nhập tài khoản
@@ -53,20 +53,19 @@ public class AuthController : Controller
         if (ModelState.IsValid)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => 
-                (u.userName == loginUser.userNameOrEmail || u.email == loginUser.userNameOrEmail) && 
-                u.password == loginUser.password) ;
+                (u.userName == loginUser.userNameOrEmail || u.email == loginUser.userNameOrEmail));
             if (user == null)
             {
-                return BadRequest("Tài khoản không tồn tại");
+                return BadRequest("Account does not exist");
             }
 
             if (user.password != loginUser.password)
             {
-                return BadRequest("Mật khẩu không đúng");
+                return BadRequest("Incorrect password");
             }
 
-            return Ok("Đăng nhập thành công");
+            return Ok("Logged in successfully");
         }
-        return BadRequest("Dữ liệu không hợp lệ");
+        return BadRequest("Invalid data");
     }
 }
