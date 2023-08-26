@@ -25,7 +25,7 @@ public class AuthController : Controller
         {
             if (await _context.Users.AnyAsync(u => (u.userName == registerUser.userName || u.email == registerUser.email)))
             {
-                return BadRequest("Username or Email already exists");
+                return BadRequest("Username or email already exists");
             }
             
             var user = new Users

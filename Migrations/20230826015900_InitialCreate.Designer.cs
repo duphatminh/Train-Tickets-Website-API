@@ -12,8 +12,8 @@ using TrainTicketsWebsite.Data;
 namespace TrainTicketsWebsite.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230824040910_UpdateTableUsers")]
-    partial class UpdateTableUsers
+    [Migration("20230826015900_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,7 +157,6 @@ namespace TrainTicketsWebsite.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("trainName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("trainID");
@@ -191,7 +190,6 @@ namespace TrainTicketsWebsite.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("user_ID");

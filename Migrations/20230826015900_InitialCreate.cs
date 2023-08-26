@@ -31,9 +31,10 @@ namespace TrainTicketsWebsite.Migrations
                 {
                     user_ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    phoneNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    userName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    phoneNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     role = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -48,7 +49,7 @@ namespace TrainTicketsWebsite.Migrations
                     trainID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     stationID = table.Column<int>(type: "int", nullable: false),
-                    trainName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    trainName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     schedule = table.Column<DateTime>(type: "datetime2", nullable: false),
                     departureStation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     arrivalStation = table.Column<string>(type: "nvarchar(max)", nullable: true),
