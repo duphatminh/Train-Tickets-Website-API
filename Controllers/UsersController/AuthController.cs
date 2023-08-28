@@ -39,7 +39,6 @@ public class AuthController : Controller
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
             return Ok("Sign Up Success");
-
         }
         return BadRequest("Invalid data");
     }
