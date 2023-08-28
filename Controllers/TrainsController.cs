@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using TrainTicketsWebsite.Data;
 using TrainTicketsWebsite.Models;
+using TrainTicketsWebsite.Service.TrainService;
 
 namespace TrainTicketsWebsite.Controllers
 {
@@ -15,95 +16,52 @@ namespace TrainTicketsWebsite.Controllers
     [ApiController]
     public class TrainsController : ControllerBase
     {
-        private readonly DataContext _context;
-        public TrainsController(DataContext context)
+        private readonly ITrainService _trainService;
+        
+        public TrainsController(ITrainService trainService)
         {
-            _context = context;
+            _trainService = trainService;
         }
-        // GET: api/TrainControllers
+        
         [HttpGet]
-        public async Task<IActionResult> GetAllTrains()
+        public async Task<ActionResult<List<TrainDetailsModel>>> GetAllTrains()
         {
-            var trains = await _context.Trains.ToListAsync();
-            return Ok(trains); 
+            return await _trainService.GetAllTrains();
         }
-
-        // GET: api/TrainControllers/5
+        
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetTrain(int id)
+        public async Task<ActionResult<TrainDetailsModel>> GetTrain(int id)
         {
-            var trainGet = await _context.Trains.SingleOrDefaultAsync(ts => ts.trainID == id);
-            if (trainGet == null)
-            {
-                return NotFound($"No record found against this Id {id}");
-            }
-            else
-            {
-                return Ok(trainGet);
-            }
+            var result = await _trainService.GetTrain(id);
+            if (result is null)
+                return NotFound("Train not found. ");
+            return Ok(result);
         }
         
-        // GET: api/TrainControllers/SortTrains
-        [HttpGet("SortTrains")]
-        public async Task<IActionResult> SortTrains()
-        {
-            var trainsSort = await _context.Trains.OrderBy(ts => ts.trainName).ToListAsync();
-            return Ok(trainsSort);
-        }
-        
-        // POST: api/TrainControllers
         [HttpPost]
-        public async Task<IActionResult> CreateTrain([FromBody] CreateTrainModel createTrainModel)
+        public async Task<ActionResult<List<TrainDetailsModel>>> CreateTrain(CreateTrainModel createTrainModel)
         {
-            var newTrain = new TrainDetailsModel()
-            {
-                stationID = createTrainModel.stationID,
-                trainName = createTrainModel.trainName,
-                departureStation = createTrainModel.departureStation,
-                arrivalStation = createTrainModel.arrivalStation
-            };
-            
-            _context.Trains.Add(newTrain);
-            await _context.SaveChangesAsync();
-            return StatusCode(StatusCodes.Status201Created);
+            var result = await _trainService.CreateTrain(createTrainModel);
+            return Ok(result);
         }
-
-        // PUT: api/TrainControllers/5
+        
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTrain(int id, [FromBody] UpdateTrainModel updateTrainModel)
+        public async Task<ActionResult<List<TrainDetailsModel>>> UpdateTrain(int id, UpdateTrainModel updateTrainModel)
         {
-            var trainUpdate = await _context.Trains.SingleOrDefaultAsync(ts => ts.trainID == id);
-            if (trainUpdate == null)
-            {
-                return NotFound($"No record found against this Id {id}");
-            }
-            else
-            {
-                trainUpdate.departureStation = updateTrainModel.departureStation;
-                trainUpdate.arrivalStation = updateTrainModel.arrivalStation;
-                trainUpdate.departureTime = updateTrainModel.departureTime;
-                trainUpdate.arrivalTime = updateTrainModel.arrivalTime;
-                
-                await _context.SaveChangesAsync();
-                return Ok("Update Success");
-            }
+            var result = await _trainService.UpdateTrain(id, updateTrainModel);
+            if (result is null)
+                return NotFound("Train not found. ");
+            return Ok(result);
         }
-
-        // DELETE: api/TrainControllers/5
+        
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {  
-            var trainDelete = await _context.Trains.SingleOrDefaultAsync(ts => ts.trainID == id);
-            if (trainDelete == null)
-            {
-                return NotFound($"No record found against this Id {id}");
-            }
-            else
-            {
-                _context.Trains.Remove(trainDelete);
-                await _context.SaveChangesAsync();
-                return Ok("Delete Success");
-            }
+        public async Task<ActionResult<List<TrainDetailsModel>>> DeleteTrain(int id)
+        {
+            var result = await _trainService.DeleteTrain(id);
+            if (result is null)
+                return NotFound("Train not found. ");
+            return Ok(result);
         }
+        
     }
 }

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TrainTicketsWebsite.Data;
+using TrainTicketsWebsite.Service.TrainService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>();
+builder.Services.AddScoped<ITrainService, TrainService>();
 
 builder.Services.AddCors(p => p.AddPolicy("cors", builder =>
 {
