@@ -138,30 +138,30 @@ public class DbInitializer
          
          if (context.Carriages.Any()) return;
          
-         var carriages = new List<Carriages>
+         var carriages = new List<CarriagesDetailsModel>
          {
-            new Carriages()
+            new CarriagesDetailsModel()
             {
                 trainID = trains[0].trainID,
                 carriageName = "Bed Compartment",
                 carriageType = "Bed",
                 carriageStatus = "Available"
             },
-            new Carriages()
+            new CarriagesDetailsModel()
             {
                 trainID = trains[0].trainID,
                 carriageName = "Bed Compartment",
                 carriageType = "Bed",
                 carriageStatus = "Available"
             },
-            new Carriages()
+            new CarriagesDetailsModel()
             {
                 trainID = trains[0].trainID,
                 carriageName = "Soft Seat Compartment with Air Conditioner",
                 carriageType = "Seat",
                 carriageStatus = "Available"
             },
-            new Carriages()
+            new CarriagesDetailsModel()
             {
                 trainID = trains[0].trainID,
                 carriageName = "Hard Seat Compartment with Air Conditioner",

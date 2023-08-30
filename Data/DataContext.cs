@@ -21,7 +21,7 @@ public class DataContext : DbContext
     
     public DbSet<Users> Users { get; set; }
     
-    public DbSet<Carriages> Carriages { get; set; }
+    public DbSet<CarriagesDetailsModel> Carriages { get; set; }
     
     public DbSet<Cabins> Cabins { get; set; }
     
