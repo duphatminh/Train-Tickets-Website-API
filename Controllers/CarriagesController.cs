@@ -21,13 +21,13 @@ namespace TrainTicketsWebsite.Controllers
         }
         
         [HttpGet]
-        public async Task<ActionResult<List<CarriagesDetailsModel>>> GetAllCarriages()
+        public async Task<ActionResult<List<CarriagesDetailModel>>> GetAllCarriages()
         {
             return await _carriageService.GetAllCarriages();
         }
         
         [HttpGet("{id}")]
-        public async Task<ActionResult<CarriagesDetailsModel>> GetCarriage(int id)
+        public async Task<ActionResult<CarriagesDetailModel>> GetCarriage(int id)
         {
             var result = await _carriageService.GetCarriage(id);
             if (result is null)
@@ -36,14 +36,14 @@ namespace TrainTicketsWebsite.Controllers
         }
         
         [HttpPost]
-        public async Task<ActionResult<List<CarriagesDetailsModel>>> CreateCarriage(CreateCarriageModel createCarriageModel)
+        public async Task<ActionResult<List<CarriagesDetailModel>>> CreateCarriage(CreateCarriageModel createCarriageModel)
         {
             var result = await _carriageService.CreateCarriage(createCarriageModel);
             return Ok(result);
         }
         
         [HttpPut("{id}")]
-        public async Task<ActionResult<List<CarriagesDetailsModel>>> UpdateCarriage(int id, UpdateCarriageModel updateCarriageModel)
+        public async Task<ActionResult<List<CarriagesDetailModel>>> UpdateCarriage(int id, UpdateCarriageModel updateCarriageModel)
         {
             var result = await _carriageService.UpdateCarriage(id, updateCarriageModel);
             if (result is null)
@@ -52,7 +52,7 @@ namespace TrainTicketsWebsite.Controllers
         }
         
         [HttpDelete("{id}")]
-        public async Task<ActionResult<List<CarriagesDetailsModel>>> DeleteCarriage(int id)
+        public async Task<ActionResult<List<CarriagesDetailModel>>> DeleteCarriage(int id)
         {
             var result = await _carriageService.DeleteCarriage(id);
             if (result is null)

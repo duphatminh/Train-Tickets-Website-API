@@ -14,13 +14,13 @@ public class CarriageService : ICarriageService
         _context = context;
     }
     
-    public async Task<List<CarriagesDetailsModel>> GetAllCarriages()
+    public async Task<List<CarriagesDetailModel>> GetAllCarriages()
     {
         var carriages = await _context.Carriages.ToListAsync();
         return carriages;
     }
     
-    public async Task<CarriagesDetailsModel> GetCarriage(int id)
+    public async Task<CarriagesDetailModel> GetCarriage(int id)
     {
         var carriageGet = await _context.Carriages.SingleOrDefaultAsync(cs => cs.carriageID == id);
         if (carriageGet == null)
@@ -31,9 +31,9 @@ public class CarriageService : ICarriageService
         return carriageGet;
     }
     
-    public async Task<List<CarriagesDetailsModel>> CreateCarriage(CreateCarriageModel createCarriageModel)
+    public async Task<List<CarriagesDetailModel>> CreateCarriage(CreateCarriageModel createCarriageModel)
     {
-        var newCarriage = new CarriagesDetailsModel()
+        var newCarriage = new CarriagesDetailModel()
         {
             trainID = createCarriageModel.trainID,
             carriageName = createCarriageModel.carriageName,
@@ -46,7 +46,7 @@ public class CarriageService : ICarriageService
         return await _context.Carriages.ToListAsync();
     }
     
-public async Task<List<CarriagesDetailsModel>> UpdateCarriage(int id,UpdateCarriageModel updateCarriageModel)
+public async Task<List<CarriagesDetailModel>> UpdateCarriage(int id,UpdateCarriageModel updateCarriageModel)
     {
         var carriageUpdate = await _context.Carriages.SingleOrDefaultAsync(cs => cs.carriageID == id);
         if (carriageUpdate == null)
@@ -63,7 +63,7 @@ public async Task<List<CarriagesDetailsModel>> UpdateCarriage(int id,UpdateCarri
         }
     }
     
-    public async Task<List<CarriagesDetailsModel>> DeleteCarriage(int id)
+    public async Task<List<CarriagesDetailModel>> DeleteCarriage(int id)
     {
         var carriageDelete = await _context.Carriages.SingleOrDefaultAsync(cs => cs.carriageID == id);
         if (carriageDelete == null)

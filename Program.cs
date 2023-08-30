@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TrainTicketsWebsite.Data;
 using TrainTicketsWebsite.Models;
 using TrainTicketsWebsite.Service.CarriageService;
+using TrainTicketsWebsite.Service.StationService;
 using TrainTicketsWebsite.Service.TrainService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services.AddDbContext<DataContext>();
 //Services
 builder.Services.AddScoped<ITrainService, TrainService>(); 
 builder.Services.AddScoped<ICarriageService, CarriageService>();
+builder.Services.AddScoped<IStationService, StationService>();
 
 builder.Services.AddCors(p => p.AddPolicy("cors", builder =>
 {

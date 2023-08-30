@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrainTicketsWebsite.Models;
 
-public class CarriagesDetailsModel
+public class CarriagesDetailModel
 {
     [Key]
     public int carriageID { get; set; }
@@ -15,7 +15,7 @@ public class CarriagesDetailsModel
     public string carriageStatus { get; set; }
     
     [ForeignKey("trainID")]
-    public virtual TrainDetailsModel TrainDetailsModel { get; set; } 
+    public virtual TrainsDetailModel TrainsDetailModel { get; set; } 
     
     public virtual ICollection<Cabins> Cabins { get; set; }
 }

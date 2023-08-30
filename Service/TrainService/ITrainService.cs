@@ -4,9 +4,9 @@ namespace TrainTicketsWebsite.Service.TrainService;
 
 public interface ITrainService
 {
-    Task<List<TrainDetailsModel>> GetAllTrains();
-    Task<TrainDetailsModel> GetTrain(int id);
-    Task<List<TrainDetailsModel>> CreateTrain(CreateTrainModel createTrainModel);
-    Task<List<TrainDetailsModel>> UpdateTrain(int id, UpdateTrainModel updateTrainModel);
-    Task<List<TrainDetailsModel>> DeleteTrain(int id);
+    Task<List<TrainsDetailModel>> GetAllTrains();
+    Task<TrainsDetailModel> GetTrain(int id);
+    Task<List<TrainsDetailModel>> CreateTrain(CreateTrainModel createTrainModel);
+    Task<List<TrainsDetailModel>> UpdateTrain(int id, UpdateTrainModel updateTrainModel);
+    Task<List<TrainsDetailModel>> DeleteTrain(int id);
 }

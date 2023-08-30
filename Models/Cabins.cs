@@ -13,7 +13,7 @@ public class Cabins
     public string cabinName { get; set; }
     
     [ForeignKey("carriageID")]
-    public virtual CarriagesDetailsModel CarriagesDetailsModel { get; set; }
+    public virtual CarriagesDetailModel CarriagesDetailModel { get; set; }
     
     public virtual ICollection<Seats> Seats { get; set; }
     

@@ -9,29 +9,29 @@ public class DbInitializer
          context.Database.EnsureCreated();
          if (context.Stations.Any()) return;
 
-         var stations = new List<Stations>
+         var stations = new List<StationsDetailModel>
          {
-             new Stations()
+             new StationsDetailModel()
              {
                  stationName = "1",
                  stationLocation = "Ho Chi Minh City"
              },
-             new Stations()
+             new StationsDetailModel()
              {
                  stationName = "2",
                  stationLocation = "Ha Noi"
              },
-             new Stations()
+             new StationsDetailModel()
              {
                  stationName = "3",
                  stationLocation = "Da Nang City"
              },
-             new Stations()
+             new StationsDetailModel()
              {
                  stationName = "4",
                  stationLocation = "Ninh Binh City"
              },
-             new Stations()
+             new StationsDetailModel()
              {
                  stationName = "5",
                  stationLocation = "Quang Ngai City"
@@ -46,9 +46,9 @@ public class DbInitializer
          
          if (context.Trains.Any()) return;
          
-         var trains = new List<TrainDetailsModel>
+         var trains = new List<TrainsDetailModel>
          {
-             new TrainDetailsModel()
+             new TrainsDetailModel()
              {
                  stationID = stations[0].stationID,
                  trainName = "SE1",
@@ -58,7 +58,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new TrainDetailsModel()
+             new TrainsDetailModel()
              {
                  stationID = stations[1].stationID,
                  trainName = "SE2",
@@ -68,7 +68,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new TrainDetailsModel()
+             new TrainsDetailModel()
              {
                  stationID = stations[1].stationID,
                  trainName = "SE3",
@@ -78,7 +78,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new TrainDetailsModel()
+             new TrainsDetailModel()
              {
                  stationID = stations[2].stationID,
                  trainName = "SE4",
@@ -88,7 +88,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new TrainDetailsModel()
+             new TrainsDetailModel()
              {
                  stationID = stations[2].stationID,
                  trainName = "SE5",
@@ -98,7 +98,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new TrainDetailsModel()
+             new TrainsDetailModel()
              {
                  stationID = stations[3].stationID,
                  trainName = "SE6",
@@ -108,7 +108,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new TrainDetailsModel()
+             new TrainsDetailModel()
              {
                  stationID = stations[3].stationID,
                  trainName = "SE7",
@@ -118,7 +118,7 @@ public class DbInitializer
                  departureTime = DateTime.Now,
                  arrivalTime = DateTime.Now,
              },
-             new TrainDetailsModel()
+             new TrainsDetailModel()
              {
                  stationID = stations[4].stationID,
                  trainName = "SE8",
@@ -138,30 +138,30 @@ public class DbInitializer
          
          if (context.Carriages.Any()) return;
          
-         var carriages = new List<CarriagesDetailsModel>
+         var carriages = new List<CarriagesDetailModel>
          {
-            new CarriagesDetailsModel()
+            new CarriagesDetailModel()
             {
                 trainID = trains[0].trainID,
                 carriageName = "Bed Compartment",
                 carriageType = "Bed",
                 carriageStatus = "Available"
             },
-            new CarriagesDetailsModel()
+            new CarriagesDetailModel()
             {
                 trainID = trains[0].trainID,
                 carriageName = "Bed Compartment",
                 carriageType = "Bed",
                 carriageStatus = "Available"
             },
-            new CarriagesDetailsModel()
+            new CarriagesDetailModel()
             {
                 trainID = trains[0].trainID,
                 carriageName = "Soft Seat Compartment with Air Conditioner",
                 carriageType = "Seat",
                 carriageStatus = "Available"
             },
-            new CarriagesDetailsModel()
+            new CarriagesDetailModel()
             {
                 trainID = trains[0].trainID,
                 carriageName = "Hard Seat Compartment with Air Conditioner",
