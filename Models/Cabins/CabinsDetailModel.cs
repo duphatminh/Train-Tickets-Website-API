@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrainTicketsWebsite.Models;
 
-public class Cabins
+public class CabinsDetailModel
 {
     [Key]
     public int cabinID { get; set; }

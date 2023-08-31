@@ -23,7 +23,7 @@ public class DataContext : DbContext
     
     public DbSet<CarriagesDetailModel> CarriagesInfo { get; set; }
     
-    public DbSet<Cabins> CabinsInfo { get; set; }
+    public DbSet<CabinsDetailModel> CabinsInfo { get; set; }
     
     public DbSet<StationsDetailModel> StationsInfo { get; set; }
     

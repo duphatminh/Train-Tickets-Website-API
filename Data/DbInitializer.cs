@@ -178,44 +178,44 @@ public class DbInitializer
          
          if (context.CabinsInfo.Any()) return;
          
-         var cabins = new List<Cabins>
+         var cabins = new List<CabinsDetailModel>
          {
-             new Cabins()
+             new CabinsDetailModel()
              {
                  carriageID = carriages[0].carriageID,
                  cabinName = "Cabin 1",
              },
-             new Cabins()
+             new CabinsDetailModel()
              {
                  carriageID = carriages[0].carriageID,
                  cabinName = "Cabin 2",
              },
-             new Cabins()
+             new CabinsDetailModel()
              {
                  carriageID = carriages[1].carriageID,
                  cabinName = "Cabin 1",
              },
-             new Cabins()
+             new CabinsDetailModel()
              {
                  carriageID = carriages[1].carriageID,
                  cabinName = "Cabin 2",
              },
-             new Cabins()
+             new CabinsDetailModel()
              {
                  carriageID = carriages[2].carriageID,
                  cabinName = "Cabin 1",
              },
-             new Cabins()
+             new CabinsDetailModel()
              {
                  carriageID = carriages[2].carriageID,
                  cabinName = "Cabin 2",
              },
-             new Cabins()
+             new CabinsDetailModel()
              {
                  carriageID = carriages[3].carriageID,
                  cabinName = "Cabin 1",
              },
-             new Cabins()
+             new CabinsDetailModel()
              {
                  carriageID = carriages[3].carriageID,
                  cabinName = "Cabin 2",

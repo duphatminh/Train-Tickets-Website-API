@@ -17,5 +17,5 @@ public class CarriagesDetailModel
     [ForeignKey("trainID")]
     public virtual TrainsDetailModel TrainsDetailModel { get; set; } 
     
-    public virtual ICollection<Cabins> Cabins { get; set; }
+    public virtual ICollection<CabinsDetailModel> Cabins { get; set; }
 }
