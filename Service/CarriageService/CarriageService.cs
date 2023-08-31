@@ -16,13 +16,13 @@ public class CarriageService : ICarriageService
     
     public async Task<List<CarriagesDetailModel>> GetAllCarriages()
     {
-        var carriages = await _context.Carriages.ToListAsync();
+        var carriages = await _context.CarriagesInfo.ToListAsync();
         return carriages;
     }
     
     public async Task<CarriagesDetailModel> GetCarriage(int id)
     {
-        var carriageGet = await _context.Carriages.SingleOrDefaultAsync(cs => cs.carriageID == id);
+        var carriageGet = await _context.CarriagesInfo.SingleOrDefaultAsync(cs => cs.carriageID == id);
         if (carriageGet == null)
         {
             return null;
@@ -41,14 +41,14 @@ public class CarriageService : ICarriageService
             carriageStatus = createCarriageModel.carriageStatus
         };
         
-        _context.Carriages.Add(newCarriage);
+        _context.CarriagesInfo.Add(newCarriage);
         await _context.SaveChangesAsync();
-        return await _context.Carriages.ToListAsync();
+        return await _context.CarriagesInfo.ToListAsync();
     }
     
 public async Task<List<CarriagesDetailModel>> UpdateCarriage(int id,UpdateCarriageModel updateCarriageModel)
     {
-        var carriageUpdate = await _context.Carriages.SingleOrDefaultAsync(cs => cs.carriageID == id);
+        var carriageUpdate = await _context.CarriagesInfo.SingleOrDefaultAsync(cs => cs.carriageID == id);
         if (carriageUpdate == null)
         {
             return null;
@@ -59,22 +59,22 @@ public async Task<List<CarriagesDetailModel>> UpdateCarriage(int id,UpdateCarria
             carriageUpdate.carriageType = updateCarriageModel.carriageType;
             carriageUpdate.carriageStatus = updateCarriageModel.carriageStatus;
             await _context.SaveChangesAsync();
-            return await _context.Carriages.ToListAsync();
+            return await _context.CarriagesInfo.ToListAsync();
         }
     }
     
     public async Task<List<CarriagesDetailModel>> DeleteCarriage(int id)
     {
-        var carriageDelete = await _context.Carriages.SingleOrDefaultAsync(cs => cs.carriageID == id);
+        var carriageDelete = await _context.CarriagesInfo.SingleOrDefaultAsync(cs => cs.carriageID == id);
         if (carriageDelete == null)
         {
             return null;
         }
         else
         {
-            _context.Carriages.Remove(carriageDelete);
+            _context.CarriagesInfo.Remove(carriageDelete);
             await _context.SaveChangesAsync();
-            return await _context.Carriages.ToListAsync();
+            return await _context.CarriagesInfo.ToListAsync();
         }
     }
 }

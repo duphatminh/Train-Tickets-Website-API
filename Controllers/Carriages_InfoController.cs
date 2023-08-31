@@ -11,11 +11,11 @@ namespace TrainTicketsWebsite.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarriagesController : ControllerBase
+    public class Carriages_InfoController : ControllerBase
     {
         private readonly ICarriageService _carriageService;
         
-        public CarriagesController(ICarriageService carriageService)
+        public Carriages_InfoController(ICarriageService carriageService)
         {
             _carriageService = carriageService;
         }

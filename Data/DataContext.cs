@@ -17,17 +17,17 @@ public class DataContext : DbContext
         optionsBuilder.EnableSensitiveDataLogging();
     }
     
-    public DbSet<TrainsDetailModel> Trains { get; set; }
+    public DbSet<TrainsDetailModel> TrainsInfo { get; set; }
     
-    public DbSet<Users> Users { get; set; }
+    public DbSet<Users> UsersInfo { get; set; }
     
-    public DbSet<CarriagesDetailModel> Carriages { get; set; }
+    public DbSet<CarriagesDetailModel> CarriagesInfo { get; set; }
     
-    public DbSet<Cabins> Cabins { get; set; }
+    public DbSet<Cabins> CabinsInfo { get; set; }
     
-    public DbSet<StationsDetailModel> Stations { get; set; }
+    public DbSet<StationsDetailModel> StationsInfo { get; set; }
     
-    public DbSet<Seats> Seats { get; set; }
+    public DbSet<Seats> SeatsInfo { get; set; }
 
     
 }

@@ -6,11 +6,11 @@ namespace TrainTicketsWebsite.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class StationsController : Controller
+public class Stations_InfoController : Controller
 {
     private readonly IStationService _stationService;
 
-    public StationsController(IStationService stationService)
+    public Stations_InfoController(IStationService stationService)
     {
         _stationService = stationService;
     }

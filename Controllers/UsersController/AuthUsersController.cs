@@ -8,11 +8,11 @@ namespace TrainTicketsWebsite.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController : Controller
+public class AuthUsersController : Controller
 {
     private readonly DataContext _context;
     
-    public AuthController(DataContext context)
+    public AuthUsersController(DataContext context)
     {
         _context = context;
     }
@@ -23,7 +23,7 @@ public class AuthController : Controller
     {
         if (ModelState.IsValid)
         {
-            if (await _context.Users.AnyAsync(u => (u.userName == registerUser.userName || u.email == registerUser.email)))
+            if (await _context.UsersInfo.AnyAsync(u => (u.userName == registerUser.userName || u.email == registerUser.email)))
             {
                 return BadRequest("Username or email already exists");
             }
@@ -36,7 +36,7 @@ public class AuthController : Controller
                 role = "customer"
             };
             
-            await _context.Users.AddAsync(user);
+            await _context.UsersInfo.AddAsync(user);
             await _context.SaveChangesAsync();
             return Ok("Sign Up Success");
         }
@@ -49,7 +49,7 @@ public class AuthController : Controller
     {
         if (ModelState.IsValid)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => 
+            var user = await _context.UsersInfo.FirstOrDefaultAsync(u => 
                 (u.userName == loginUser.userNameOrEmail || u.email == loginUser.userNameOrEmail));
             if (user == null)
             {

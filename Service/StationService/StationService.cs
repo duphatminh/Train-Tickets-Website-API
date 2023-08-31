@@ -15,13 +15,13 @@ public class StationService : IStationService
     
     public async Task<List<StationsDetailModel>> GetAllStations()
     {
-        var stations = await _context.Stations.ToListAsync();
+        var stations = await _context.StationsInfo.ToListAsync();
         return stations;
     }
     
     public async Task<StationsDetailModel> GetStation(int id)
     {
-        var stationGet = await _context.Stations.SingleOrDefaultAsync(s => s.stationID == id);
+        var stationGet = await _context.StationsInfo.SingleOrDefaultAsync(s => s.stationID == id);
         if (stationGet == null)
         {
             return null;
@@ -38,14 +38,14 @@ public class StationService : IStationService
             stationLocation = createStationModel.stationLocation
         };
         
-        _context.Stations.Add(newStation);
+        _context.StationsInfo.Add(newStation);
         await _context.SaveChangesAsync();
-        return await _context.Stations.ToListAsync();
+        return await _context.StationsInfo.ToListAsync();
     }
     
     public async Task<List<StationsDetailModel>> UpdateStation(int id, UpdateStationModel updateStationModel)
     {
-        var stationUpdate = await _context.Stations.SingleOrDefaultAsync(s => s.stationID == id);
+        var stationUpdate = await _context.StationsInfo.SingleOrDefaultAsync(s => s.stationID == id);
         if (stationUpdate == null)
         {
             return null;
@@ -54,22 +54,22 @@ public class StationService : IStationService
         {
             stationUpdate.stationLocation = updateStationModel.stationLocation;
             await _context.SaveChangesAsync();
-            return await _context.Stations.ToListAsync();
+            return await _context.StationsInfo.ToListAsync();
         }
     }
     
     public async Task<List<StationsDetailModel>> DeleteStation(int id)
     {
-        var stationDelete = await _context.Stations.SingleOrDefaultAsync(s => s.stationID == id);
+        var stationDelete = await _context.StationsInfo.SingleOrDefaultAsync(s => s.stationID == id);
         if (stationDelete == null)
         {
             return null;
         }
         else
         {
-            _context.Stations.Remove(stationDelete);
+            _context.StationsInfo.Remove(stationDelete);
             await _context.SaveChangesAsync();
-            return await _context.Stations.ToListAsync();
+            return await _context.StationsInfo.ToListAsync();
         }
     }
 }

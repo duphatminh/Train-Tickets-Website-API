@@ -12,7 +12,7 @@ namespace TrainTicketsWebsite.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Stations",
+                name: "StationsInfo",
                 columns: table => new
                 {
                     stationID = table.Column<int>(type: "int", nullable: false)
@@ -22,11 +22,11 @@ namespace TrainTicketsWebsite.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stations", x => x.stationID);
+                    table.PrimaryKey("PK_StationsInfo", x => x.stationID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "UsersInfo",
                 columns: table => new
                 {
                     user_ID = table.Column<int>(type: "int", nullable: false)
@@ -39,11 +39,11 @@ namespace TrainTicketsWebsite.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.user_ID);
+                    table.PrimaryKey("PK_UsersInfo", x => x.user_ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Trains",
+                name: "TrainsInfo",
                 columns: table => new
                 {
                     trainID = table.Column<int>(type: "int", nullable: false)
@@ -58,17 +58,17 @@ namespace TrainTicketsWebsite.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Trains", x => x.trainID);
+                    table.PrimaryKey("PK_TrainsInfo", x => x.trainID);
                     table.ForeignKey(
-                        name: "FK_Trains_Stations_stationID",
+                        name: "FK_TrainsInfo_StationsInfo_stationID",
                         column: x => x.stationID,
-                        principalTable: "Stations",
+                        principalTable: "StationsInfo",
                         principalColumn: "stationID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Carriages",
+                name: "CarriagesInfo",
                 columns: table => new
                 {
                     carriageID = table.Column<int>(type: "int", nullable: false)
@@ -80,17 +80,17 @@ namespace TrainTicketsWebsite.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Carriages", x => x.carriageID);
+                    table.PrimaryKey("PK_CarriagesInfo", x => x.carriageID);
                     table.ForeignKey(
-                        name: "FK_Carriages_Trains_trainID",
+                        name: "FK_CarriagesInfo_TrainsInfo_trainID",
                         column: x => x.trainID,
-                        principalTable: "Trains",
+                        principalTable: "TrainsInfo",
                         principalColumn: "trainID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cabins",
+                name: "CabinsInfo",
                 columns: table => new
                 {
                     cabinID = table.Column<int>(type: "int", nullable: false)
@@ -100,17 +100,17 @@ namespace TrainTicketsWebsite.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cabins", x => x.cabinID);
+                    table.PrimaryKey("PK_CabinsInfo", x => x.cabinID);
                     table.ForeignKey(
-                        name: "FK_Cabins_Carriages_carriageID",
+                        name: "FK_CabinsInfo_CarriagesInfo_carriageID",
                         column: x => x.carriageID,
-                        principalTable: "Carriages",
+                        principalTable: "CarriagesInfo",
                         principalColumn: "carriageID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Seats",
+                name: "SeatsInfo",
                 columns: table => new
                 {
                     seatID = table.Column<int>(type: "int", nullable: false)
@@ -123,33 +123,33 @@ namespace TrainTicketsWebsite.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Seats", x => x.seatID);
+                    table.PrimaryKey("PK_SeatsInfo", x => x.seatID);
                     table.ForeignKey(
-                        name: "FK_Seats_Cabins_cabinID",
+                        name: "FK_SeatsInfo_CabinsInfo_cabinID",
                         column: x => x.cabinID,
-                        principalTable: "Cabins",
+                        principalTable: "CabinsInfo",
                         principalColumn: "cabinID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cabins_carriageID",
-                table: "Cabins",
+                name: "IX_CabinsInfo_carriageID",
+                table: "CabinsInfo",
                 column: "carriageID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Carriages_trainID",
-                table: "Carriages",
+                name: "IX_CarriagesInfo_trainID",
+                table: "CarriagesInfo",
                 column: "trainID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Seats_cabinID",
-                table: "Seats",
+                name: "IX_SeatsInfo_cabinID",
+                table: "SeatsInfo",
                 column: "cabinID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trains_stationID",
-                table: "Trains",
+                name: "IX_TrainsInfo_stationID",
+                table: "TrainsInfo",
                 column: "stationID");
         }
 
@@ -157,22 +157,22 @@ namespace TrainTicketsWebsite.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Seats");
+                name: "SeatsInfo");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "UsersInfo");
 
             migrationBuilder.DropTable(
-                name: "Cabins");
+                name: "CabinsInfo");
 
             migrationBuilder.DropTable(
-                name: "Carriages");
+                name: "CarriagesInfo");
 
             migrationBuilder.DropTable(
-                name: "Trains");
+                name: "TrainsInfo");
 
             migrationBuilder.DropTable(
-                name: "Stations");
+                name: "StationsInfo");
         }
     }
 }

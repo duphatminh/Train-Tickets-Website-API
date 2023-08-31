@@ -7,7 +7,7 @@ public class DbInitializer
      public static void Initialize(DataContext context)
      {
          context.Database.EnsureCreated();
-         if (context.Stations.Any()) return;
+         if (context.StationsInfo.Any()) return;
 
          var stations = new List<StationsDetailModel>
          {
@@ -40,11 +40,11 @@ public class DbInitializer
 
          foreach (var station in stations)
          {
-             context.Stations.Add(station);
+             context.StationsInfo.Add(station);
          }
          context.SaveChanges(); 
          
-         if (context.Trains.Any()) return;
+         if (context.TrainsInfo.Any()) return;
          
          var trains = new List<TrainsDetailModel>
          {
@@ -132,11 +132,11 @@ public class DbInitializer
 
          foreach (var train in trains)
          {
-             context.Trains.Add(train);
+             context.TrainsInfo.Add(train);
          }
          context.SaveChanges(); 
          
-         if (context.Carriages.Any()) return;
+         if (context.CarriagesInfo.Any()) return;
          
          var carriages = new List<CarriagesDetailModel>
          {
@@ -172,11 +172,11 @@ public class DbInitializer
 
          foreach (var carriage in carriages)
          {
-             context.Carriages.Add(carriage);
+             context.CarriagesInfo.Add(carriage);
          }
          context.SaveChanges(); 
          
-         if (context.Cabins.Any()) return;
+         if (context.CabinsInfo.Any()) return;
          
          var cabins = new List<Cabins>
          {
@@ -224,11 +224,11 @@ public class DbInitializer
          
          foreach (var cabin in cabins)
          {
-             context.Cabins.Add(cabin);
+             context.CabinsInfo.Add(cabin);
          }
          context.SaveChanges(); 
          
-         if (context.Seats.Any()) return;
+         if (context.SeatsInfo.Any()) return;
          
          var seats = new List<Seats>
          {
@@ -524,12 +524,12 @@ public class DbInitializer
          
         foreach (var seat in seats)
         {
-            context.Seats.Add(seat);
+            context.SeatsInfo.Add(seat);
         }
         
          context.SaveChanges();   
          
-         if (context.Users.Any()) return;
+         if (context.UsersInfo.Any()) return;
 
          var users = new List<Users>
          {
@@ -569,7 +569,7 @@ public class DbInitializer
 
          foreach (var user in users)
          {
-             context.Users.Add(user);
+             context.UsersInfo.Add(user);
          }
 
          context.SaveChanges();

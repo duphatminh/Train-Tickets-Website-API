@@ -15,13 +15,13 @@ public class TrainService : ITrainService
     }
     public async Task<List<TrainsDetailModel>> GetAllTrains()
     {
-        var trains = await _context.Trains.ToListAsync();
+        var trains = await _context.TrainsInfo.ToListAsync();
         return trains; 
     }
     
     public async Task<TrainsDetailModel> GetTrain(int id)
     {
-        var trainGet = await _context.Trains.SingleOrDefaultAsync(ts => ts.trainID == id);
+        var trainGet = await _context.TrainsInfo.SingleOrDefaultAsync(ts => ts.trainID == id);
         if (trainGet == null)
         {
             return null;
@@ -40,14 +40,14 @@ public class TrainService : ITrainService
             arrivalStation = createTrainModel.arrivalStation
         };
             
-        _context.Trains.Add(newTrain);
+        _context.TrainsInfo.Add(newTrain);
         await _context.SaveChangesAsync();
-        return await _context.Trains.ToListAsync();
+        return await _context.TrainsInfo.ToListAsync();
     }
     
     public async Task<List<TrainsDetailModel>> UpdateTrain(int id, [FromBody] UpdateTrainModel updateTrainModel)
     {
-        var trainUpdate = await _context.Trains.SingleOrDefaultAsync(ts => ts.trainID == id);
+        var trainUpdate = await _context.TrainsInfo.SingleOrDefaultAsync(ts => ts.trainID == id);
         if (trainUpdate == null)
         {
             return null;
@@ -60,22 +60,22 @@ public class TrainService : ITrainService
             trainUpdate.arrivalTime = updateTrainModel.arrivalTime;
                 
             await _context.SaveChangesAsync();
-            return await _context.Trains.ToListAsync();
+            return await _context.TrainsInfo.ToListAsync();
         }
     }
     
     public async Task<List<TrainsDetailModel>> DeleteTrain(int id)
     {  
-        var trainDelete = await _context.Trains.SingleOrDefaultAsync(ts => ts.trainID == id);
+        var trainDelete = await _context.TrainsInfo.SingleOrDefaultAsync(ts => ts.trainID == id);
         if (trainDelete == null)
         {
             return null;
         }
         else
         {
-            _context.Trains.Remove(trainDelete);
+            _context.TrainsInfo.Remove(trainDelete);
             await _context.SaveChangesAsync();
-            return await _context.Trains.ToListAsync();
+            return await _context.TrainsInfo.ToListAsync();
         }
     }
 }

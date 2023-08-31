@@ -14,11 +14,11 @@ namespace TrainTicketsWebsite.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TrainsController : ControllerBase
+    public class Trains_InfoController : ControllerBase
     {
         private readonly ITrainService _trainService;
         
-        public TrainsController(ITrainService trainService)
+        public Trains_InfoController(ITrainService trainService)
         {
             _trainService = trainService;
         }
