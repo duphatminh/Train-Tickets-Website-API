@@ -13,7 +13,7 @@ public class CabinService : ICabinService
         _context = context;
     }
     
-    public async Task<List<CabinsDetailModel>> GetAllCabins()
+    public async Task<List<Cabins>> GetAllCabins()
     {
         var cabins = await _context.CabinsInfo
             // .Include(cb => cb.CarriagesDetailModel)
@@ -22,7 +22,7 @@ public class CabinService : ICabinService
         return cabins;
     }
     
-    public async Task<CabinsDetailModel> GetCabin(int id)
+    public async Task<Cabins> GetCabin(int id)
     {
         var cabinGet = await _context.CabinsInfo.SingleOrDefaultAsync(cg => cg.cabinID == id);
         if (cabinGet == null)
@@ -33,9 +33,9 @@ public class CabinService : ICabinService
         return cabinGet;
     }
 
-    public async Task<List<CabinsDetailModel>> CreateCabin(CreateCabinModel createCabinModel)
+    public async Task<List<Cabins>> CreateCabin(CreateCabinModel createCabinModel)
     {
-        var newCabin = new CabinsDetailModel()
+        var newCabin = new Cabins()
         {
             carriageID = createCabinModel.carriageID,
             cabinName = createCabinModel.cabinName,
@@ -46,7 +46,7 @@ public class CabinService : ICabinService
         return await _context.CabinsInfo.ToListAsync();
     }
     
-    public async Task<List<CabinsDetailModel>> UpdateCabin(int id, UpdateCabinModel updateCabinModel)
+    public async Task<List<Cabins>> UpdateCabin(int id, UpdateCabinModel updateCabinModel)
     {
         var cabinUpdate = await _context.CabinsInfo.SingleOrDefaultAsync(cg => cg.cabinID == id);
         if (cabinUpdate == null)
@@ -61,7 +61,7 @@ public class CabinService : ICabinService
         }
     }
     
-    public async Task<List<CabinsDetailModel>> DeleteCabin(int id)
+    public async Task<List<Cabins>> DeleteCabin(int id)
     {
         var cabinDelete = await _context.CabinsInfo.SingleOrDefaultAsync(cg => cg.cabinID == id);
         if (cabinDelete == null)

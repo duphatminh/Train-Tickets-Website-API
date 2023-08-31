@@ -13,13 +13,13 @@ public class StationService : IStationService
         _context = context;
     }
     
-    public async Task<List<StationsDetailModel>> GetAllStations()
+    public async Task<List<Stations>> GetAllStations()
     {
         var stations = await _context.StationsInfo.ToListAsync();
         return stations;
     }
     
-    public async Task<StationsDetailModel> GetStation(int id)
+    public async Task<Stations> GetStation(int id)
     {
         var stationGet = await _context.StationsInfo.SingleOrDefaultAsync(s => s.stationID == id);
         if (stationGet == null)
@@ -30,9 +30,9 @@ public class StationService : IStationService
         return stationGet;
     }
     
-    public async Task<List<StationsDetailModel>> CreateStation(CreateStationModel createStationModel)
+    public async Task<List<Stations>> CreateStation(CreateStationModel createStationModel)
     {
-        var newStation = new StationsDetailModel()
+        var newStation = new Stations()
         {
             stationName = createStationModel.stationName,
             stationLocation = createStationModel.stationLocation
@@ -43,7 +43,7 @@ public class StationService : IStationService
         return await _context.StationsInfo.ToListAsync();
     }
     
-    public async Task<List<StationsDetailModel>> UpdateStation(int id, UpdateStationModel updateStationModel)
+    public async Task<List<Stations>> UpdateStation(int id, UpdateStationModel updateStationModel)
     {
         var stationUpdate = await _context.StationsInfo.SingleOrDefaultAsync(s => s.stationID == id);
         if (stationUpdate == null)
@@ -58,7 +58,7 @@ public class StationService : IStationService
         }
     }
     
-    public async Task<List<StationsDetailModel>> DeleteStation(int id)
+    public async Task<List<Stations>> DeleteStation(int id)
     {
         var stationDelete = await _context.StationsInfo.SingleOrDefaultAsync(s => s.stationID == id);
         if (stationDelete == null)

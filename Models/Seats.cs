@@ -21,5 +21,5 @@ public class Seats
     public int price { get; set; }
     
     [ForeignKey("cabinID")]
-    public virtual CabinsDetailModel CabinsDetailModel { get; set; }
+    public virtual Cabins Cabins { get; set; }
 }

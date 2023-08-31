@@ -16,13 +16,13 @@ public class Stations_InfoController : Controller
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<StationsDetailModel>>> GetAllStations()
+    public async Task<ActionResult<List<Stations>>> GetAllStations()
     {
         return await _stationService.GetAllStations();
     }
     
     [HttpGet("{id}")]
-    public async Task<ActionResult<StationsDetailModel>> GetStation(int id)
+    public async Task<ActionResult<Stations>> GetStation(int id)
     {
         var result = await _stationService.GetStation(id);
         if (result is null)
@@ -31,14 +31,14 @@ public class Stations_InfoController : Controller
     }
     
     [HttpPost]
-    public async Task<ActionResult<List<StationsDetailModel>>> CreateStation(CreateStationModel createStationModel)
+    public async Task<ActionResult<List<Stations>>> CreateStation(CreateStationModel createStationModel)
     {
         var result = await _stationService.CreateStation(createStationModel);
         return Ok(result);
     }
     
     [HttpPut("{id}")]
-    public async Task<ActionResult<List<StationsDetailModel>>> UpdateStation(int id, UpdateStationModel updateStationModel)
+    public async Task<ActionResult<List<Stations>>> UpdateStation(int id, UpdateStationModel updateStationModel)
     {
         var result = await _stationService.UpdateStation(id, updateStationModel);
         if (result is null)
@@ -47,7 +47,7 @@ public class Stations_InfoController : Controller
     }
     
     [HttpDelete("{id}")]
-    public async Task<ActionResult<List<StationsDetailModel>>> DeleteStation(int id)
+    public async Task<ActionResult<List<Stations>>> DeleteStation(int id)
     {
         var result = await _stationService.DeleteStation(id);
         if (result is null)

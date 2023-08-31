@@ -14,13 +14,13 @@ public class CarriageService : ICarriageService
         _context = context;
     }
     
-    public async Task<List<CarriagesDetailModel>> GetAllCarriages()
+    public async Task<List<Carriages>> GetAllCarriages()
     {
         var carriages = await _context.CarriagesInfo.ToListAsync();
         return carriages;
     }
     
-    public async Task<CarriagesDetailModel> GetCarriage(int id)
+    public async Task<Carriages> GetCarriage(int id)
     {
         var carriageGet = await _context.CarriagesInfo.SingleOrDefaultAsync(cs => cs.carriageID == id);
         if (carriageGet == null)
@@ -31,9 +31,9 @@ public class CarriageService : ICarriageService
         return carriageGet;
     }
     
-    public async Task<List<CarriagesDetailModel>> CreateCarriage(CreateCarriageModel createCarriageModel)
+    public async Task<List<Carriages>> CreateCarriage(CreateCarriageModel createCarriageModel)
     {
-        var newCarriage = new CarriagesDetailModel()
+        var newCarriage = new Carriages()
         {
             trainID = createCarriageModel.trainID,
             carriageName = createCarriageModel.carriageName,
@@ -46,7 +46,7 @@ public class CarriageService : ICarriageService
         return await _context.CarriagesInfo.ToListAsync();
     }
     
-public async Task<List<CarriagesDetailModel>> UpdateCarriage(int id,UpdateCarriageModel updateCarriageModel)
+public async Task<List<Carriages>> UpdateCarriage(int id,UpdateCarriageModel updateCarriageModel)
     {
         var carriageUpdate = await _context.CarriagesInfo.SingleOrDefaultAsync(cs => cs.carriageID == id);
         if (carriageUpdate == null)
@@ -63,7 +63,7 @@ public async Task<List<CarriagesDetailModel>> UpdateCarriage(int id,UpdateCarria
         }
     }
     
-    public async Task<List<CarriagesDetailModel>> DeleteCarriage(int id)
+    public async Task<List<Carriages>> DeleteCarriage(int id)
     {
         var carriageDelete = await _context.CarriagesInfo.SingleOrDefaultAsync(cs => cs.carriageID == id);
         if (carriageDelete == null)

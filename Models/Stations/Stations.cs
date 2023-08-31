@@ -2,7 +2,7 @@
 
 namespace TrainTicketsWebsite.Models;
 
-public class StationsDetailModel
+public class Stations
 {
     [Key]
     public int stationID { get; set; }
@@ -11,5 +11,5 @@ public class StationsDetailModel
     public string stationName { get; set; }
     public string stationLocation { get; set; }
     
-    public virtual ICollection<TrainsDetailModel> Trains { get; set; }
+    public virtual ICollection<Trains> Trains { get; set; }
 }

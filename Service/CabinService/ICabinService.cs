@@ -4,9 +4,9 @@ namespace TrainTicketsWebsite.Service.CabinService;
 
 public interface ICabinService
 {
-    Task<List<CabinsDetailModel>> GetAllCabins();
-    Task<CabinsDetailModel> GetCabin(int id);
-    Task<List<CabinsDetailModel>> CreateCabin(CreateCabinModel createCabinModel);
-    Task<List<CabinsDetailModel>> UpdateCabin(int id, UpdateCabinModel updateCabinModel);
-    Task<List<CabinsDetailModel>> DeleteCabin(int id);
+    Task<List<Cabins>> GetAllCabins();
+    Task<Cabins> GetCabin(int id);
+    Task<List<Cabins>> CreateCabin(CreateCabinModel createCabinModel);
+    Task<List<Cabins>> UpdateCabin(int id, UpdateCabinModel updateCabinModel);
+    Task<List<Cabins>> DeleteCabin(int id);
 }

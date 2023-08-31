@@ -16,13 +16,13 @@ public class Cabins_InfoController : Controller
     }
     
     [HttpGet]
-    public async Task<ActionResult<List<CabinsDetailModel>>> GetAllCabins()
+    public async Task<ActionResult<List<Cabins>>> GetAllCabins()
     {
         return await _cabinService.GetAllCabins();
     }
     
     [HttpGet("{id}")]
-    public async Task<ActionResult<CabinsDetailModel>> GetCabin(int id)
+    public async Task<ActionResult<Cabins>> GetCabin(int id)
     {
         var result = await _cabinService.GetCabin(id);
         if (result is null)
@@ -31,14 +31,14 @@ public class Cabins_InfoController : Controller
     }
     
     [HttpPost]
-    public async Task<ActionResult<List<CabinsDetailModel>>> CreateCabin(CreateCabinModel createCabinModel)
+    public async Task<ActionResult<List<Cabins>>> CreateCabin(CreateCabinModel createCabinModel)
     {
         var result = await _cabinService.CreateCabin(createCabinModel);
         return Ok(result);
     }
     
     [HttpPut("{id}")]
-    public async Task<ActionResult<List<CabinsDetailModel>>> UpdateCabin(int id, UpdateCabinModel updateCabinModel)
+    public async Task<ActionResult<List<Cabins>>> UpdateCabin(int id, UpdateCabinModel updateCabinModel)
     {
         var result = await _cabinService.UpdateCabin(id, updateCabinModel);
         if (result is null)
@@ -47,7 +47,7 @@ public class Cabins_InfoController : Controller
     }
     
     [HttpDelete("{id}")]
-    public async Task<ActionResult<List<CabinsDetailModel>>> DeleteCabin(int id)
+    public async Task<ActionResult<List<Cabins>>> DeleteCabin(int id)
     {
         var result = await _cabinService.DeleteCabin(id);
         if (result is null)

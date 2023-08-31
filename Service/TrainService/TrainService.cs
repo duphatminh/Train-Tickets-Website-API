@@ -13,13 +13,13 @@ public class TrainService : ITrainService
     {
         _context = context;
     }
-    public async Task<List<TrainsDetailModel>> GetAllTrains()
+    public async Task<List<Trains>> GetAllTrains()
     {
         var trains = await _context.TrainsInfo.ToListAsync();
         return trains; 
     }
     
-    public async Task<TrainsDetailModel> GetTrain(int id)
+    public async Task<Trains> GetTrain(int id)
     {
         var trainGet = await _context.TrainsInfo.SingleOrDefaultAsync(ts => ts.trainID == id);
         if (trainGet == null)
@@ -30,9 +30,9 @@ public class TrainService : ITrainService
         return trainGet;
     }
     
-    public async Task<List<TrainsDetailModel>> CreateTrain(CreateTrainModel createTrainModel)
+    public async Task<List<Trains>> CreateTrain(CreateTrainModel createTrainModel)
     {
-        var newTrain = new TrainsDetailModel()
+        var newTrain = new Trains()
         {
             stationID = createTrainModel.stationID,
             trainName = createTrainModel.trainName,
@@ -45,7 +45,7 @@ public class TrainService : ITrainService
         return await _context.TrainsInfo.ToListAsync();
     }
     
-    public async Task<List<TrainsDetailModel>> UpdateTrain(int id, [FromBody] UpdateTrainModel updateTrainModel)
+    public async Task<List<Trains>> UpdateTrain(int id, [FromBody] UpdateTrainModel updateTrainModel)
     {
         var trainUpdate = await _context.TrainsInfo.SingleOrDefaultAsync(ts => ts.trainID == id);
         if (trainUpdate == null)
@@ -64,7 +64,7 @@ public class TrainService : ITrainService
         }
     }
     
-    public async Task<List<TrainsDetailModel>> DeleteTrain(int id)
+    public async Task<List<Trains>> DeleteTrain(int id)
     {  
         var trainDelete = await _context.TrainsInfo.SingleOrDefaultAsync(ts => ts.trainID == id);
         if (trainDelete == null)
