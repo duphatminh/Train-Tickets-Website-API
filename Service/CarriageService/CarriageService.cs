@@ -16,8 +16,10 @@ public class CarriageService : ICarriageService
     
     public async Task<List<Carriages>> GetAllCarriages()
     {
-        var carriages = await _context.CarriagesInfo.ToListAsync();
-        return carriages;
+        var carriagesWithCabins = await _context.CarriagesInfo
+            .ToListAsync();
+        
+        return carriagesWithCabins;
     }
     
     public async Task<Carriages> GetCarriage(int id)

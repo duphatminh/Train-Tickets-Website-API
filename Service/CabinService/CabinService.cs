@@ -15,11 +15,10 @@ public class CabinService : ICabinService
     
     public async Task<List<Cabins>> GetAllCabins()
     {
-        var cabins = await _context.CabinsInfo
-            // .Include(cb => cb.CarriagesDetailModel)
-            // .Include(cb => cb.Seats)
+        var cabinsWithSeats = await _context.CabinsInfo
             .ToListAsync();
-        return cabins;
+        
+        return cabinsWithSeats;
     }
     
     public async Task<Cabins> GetCabin(int id)

@@ -15,8 +15,10 @@ public class TrainService : ITrainService
     }
     public async Task<List<Trains>> GetAllTrains()
     {
-        var trains = await _context.TrainsInfo.ToListAsync();
-        return trains; 
+        var trainsWithStationsAndCarriages = await _context.TrainsInfo
+            .ToListAsync();
+        
+        return trainsWithStationsAndCarriages;
     }
     
     public async Task<Trains> GetTrain(int id)
