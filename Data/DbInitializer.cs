@@ -573,5 +573,22 @@ public class DbInitializer
          }
 
          context.SaveChanges();
+         
+         if (context.BookingsInfo.Any()) return;
+
+         var bookings = new List<Bookings>()
+         {
+             new Bookings()
+             {
+                 // userID = users[0].userID,
+                 // seatID = seats[0].seatID,
+                 // departureStation = stations[0].stationID,
+                 // arrivalStation = stations[1].stationID,
+                 // departureTime = DateTime.Now,
+                 // numberOfTickets = 1,
+                 // totalPrice = 1000000
+             }
+                
+         };
      }
 }

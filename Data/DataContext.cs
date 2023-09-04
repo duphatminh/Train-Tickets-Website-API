@@ -29,5 +29,7 @@ public class DataContext : DbContext
     
     public DbSet<Seats> SeatsInfo { get; set; }
 
+    public DbSet<Bookings> BookingsInfo { get; set; }
     
+    public DbSet<Payments> PaymentsInfo { get; set; }
 }

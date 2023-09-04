@@ -22,4 +22,6 @@ public class Seats
     
     [ForeignKey("cabinID")]
     public virtual Cabins Cabins { get; set; }
+    
+public virtual ICollection<Bookings> Bookings { get; set; }
 }

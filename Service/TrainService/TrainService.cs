@@ -80,4 +80,20 @@ public class TrainService : ITrainService
             return await _context.TrainsInfo.ToListAsync();
         }
     }
+    
+    public async Task<List<PopularTrainModel>> GetPopularTrains()
+    {
+        var popularTrains = await _context.TrainsInfo
+            .GroupBy(ts => ts.trainID)
+            .Select(ts => new PopularTrainModel
+            {
+                trainID = ts.Key,
+                trainName = ts.Select(ts => ts.trainName).FirstOrDefault(),
+                numberOfBooking = _context.BookingsInfo.Count(bi => bi.seatID == ts.Key)
+            })
+            .OrderByDescending(ts => ts.numberOfBooking)
+            .ToListAsync();
+        
+        return popularTrains;
+    }
 }

@@ -1,7 +1,10 @@
-﻿namespace TrainTicketsWebsite.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TrainTicketsWebsite.Models;
 
 public class Payments
 {
+    [Key]
     public int paymentID { get; set; }
     public string paymentMethod { get; set; }
     public string creditCardNumber { get; set; }

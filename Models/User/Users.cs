@@ -14,4 +14,6 @@ public class Users
     [Required]
     public string password { get; set; }
     public string role { get; set; }
+    
+    public virtual ICollection<Bookings> Bookings { get; set; }
 }

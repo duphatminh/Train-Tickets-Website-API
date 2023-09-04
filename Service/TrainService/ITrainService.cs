@@ -9,4 +9,6 @@ public interface ITrainService
     Task<List<Trains>> CreateTrain(CreateTrainModel createTrainModel);
     Task<List<Trains>> UpdateTrain(int id, UpdateTrainModel updateTrainModel);
     Task<List<Trains>> DeleteTrain(int id);
+    
+    Task<List<PopularTrainModel>> GetPopularTrains();
 }
