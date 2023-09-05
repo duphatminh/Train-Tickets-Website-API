@@ -30,11 +30,11 @@ namespace TrainTicketsWebsite.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("bookingID"));
 
-                    b.Property<int>("arrivalStation")
-                        .HasColumnType("int");
+                    b.Property<string>("arrivalStation")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("departureStation")
-                        .HasColumnType("int");
+                    b.Property<string>("departureStation")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("departureTime")
                         .HasColumnType("datetime2");
@@ -228,11 +228,11 @@ namespace TrainTicketsWebsite.Migrations
 
             modelBuilder.Entity("TrainTicketsWebsite.Models.Users", b =>
                 {
-                    b.Property<int>("user_ID")
+                    b.Property<int>("userID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("user_ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userID"));
 
                     b.Property<string>("email")
                         .HasMaxLength(30)
@@ -252,7 +252,7 @@ namespace TrainTicketsWebsite.Migrations
                     b.Property<string>("userName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("user_ID");
+                    b.HasKey("userID");
 
                     b.ToTable("UsersInfo");
                 });

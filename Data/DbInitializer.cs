@@ -580,15 +580,43 @@ public class DbInitializer
          {
              new Bookings()
              {
-                 // userID = users[0].userID,
-                 // seatID = seats[0].seatID,
-                 // departureStation = stations[0].stationID,
-                 // arrivalStation = stations[1].stationID,
-                 // departureTime = DateTime.Now,
-                 // numberOfTickets = 1,
-                 // totalPrice = 1000000
-             }
-                
+                 userID = users[1].userID,
+                 seatID = seats[1].seatID,
+                 departureStation = "Ho Chi Minh City",
+                 arrivalStation = "Ha Noi",
+                 departureTime = DateTime.Now,
+                 numberOfTickets = 1,
+                 totalPrice = 1000000
+             },
+             
+             new Bookings()
+             {
+                 userID = users[2].userID,
+                 seatID = seats[2].seatID,
+                 departureStation = "Ha Noi",
+                 arrivalStation = "Ho Chi Minh City",
+                 departureTime = DateTime.Now,
+                 numberOfTickets = 1,
+                 totalPrice = 1000000
+             },
+             
+             new Bookings()
+             {
+                 userID = users[3].userID,
+                 seatID = seats[3].seatID,
+                 departureStation = "Ha Noi",
+                 arrivalStation = "Da Nang City",
+                 departureTime = DateTime.Now,
+                 numberOfTickets = 3,
+                 totalPrice = 3000000
+             },
          };
+
+         foreach (var booking in bookings)
+         { 
+             context.BookingsInfo.Add(booking);
+         }
+         
+         context.SaveChanges();
      }
 }

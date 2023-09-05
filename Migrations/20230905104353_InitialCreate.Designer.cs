@@ -12,7 +12,7 @@ using TrainTicketsWebsite.Data;
 namespace TrainTicketsWebsite.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230831093058_InitialCreate")]
+    [Migration("20230905104353_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,6 +24,44 @@ namespace TrainTicketsWebsite.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("TrainTicketsWebsite.Models.Bookings", b =>
+                {
+                    b.Property<int>("bookingID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("bookingID"));
+
+                    b.Property<string>("arrivalStation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("departureStation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("departureTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("numberOfTickets")
+                        .HasColumnType("int");
+
+                    b.Property<int>("seatID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("totalPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("userID")
+                        .HasColumnType("int");
+
+                    b.HasKey("bookingID");
+
+                    b.HasIndex("seatID");
+
+                    b.HasIndex("userID");
+
+                    b.ToTable("BookingsInfo");
+                });
 
             modelBuilder.Entity("TrainTicketsWebsite.Models.Cabins", b =>
                 {
@@ -48,7 +86,7 @@ namespace TrainTicketsWebsite.Migrations
                     b.ToTable("CabinsInfo");
                 });
 
-            modelBuilder.Entity("TrainTicketsWebsite.Models.CarriagesDetailModel", b =>
+            modelBuilder.Entity("TrainTicketsWebsite.Models.Carriages", b =>
                 {
                     b.Property<int>("carriageID")
                         .ValueGeneratedOnAdd()
@@ -75,6 +113,31 @@ namespace TrainTicketsWebsite.Migrations
                     b.HasIndex("trainID");
 
                     b.ToTable("CarriagesInfo");
+                });
+
+            modelBuilder.Entity("TrainTicketsWebsite.Models.Payments", b =>
+                {
+                    b.Property<int>("paymentID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("paymentID"));
+
+                    b.Property<string>("creditCardNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("cvv")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("expirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("paymentMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("paymentID");
+
+                    b.ToTable("PaymentsInfo");
                 });
 
             modelBuilder.Entity("TrainTicketsWebsite.Models.Seats", b =>
@@ -109,7 +172,7 @@ namespace TrainTicketsWebsite.Migrations
                     b.ToTable("SeatsInfo");
                 });
 
-            modelBuilder.Entity("TrainTicketsWebsite.Models.StationsDetailModel", b =>
+            modelBuilder.Entity("TrainTicketsWebsite.Models.Stations", b =>
                 {
                     b.Property<int>("stationID")
                         .ValueGeneratedOnAdd()
@@ -130,7 +193,7 @@ namespace TrainTicketsWebsite.Migrations
                     b.ToTable("StationsInfo");
                 });
 
-            modelBuilder.Entity("TrainTicketsWebsite.Models.TrainsDetailModel", b =>
+            modelBuilder.Entity("TrainTicketsWebsite.Models.Trains", b =>
                 {
                     b.Property<int>("trainID")
                         .ValueGeneratedOnAdd()
@@ -168,11 +231,11 @@ namespace TrainTicketsWebsite.Migrations
 
             modelBuilder.Entity("TrainTicketsWebsite.Models.Users", b =>
                 {
-                    b.Property<int>("user_ID")
+                    b.Property<int>("userID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("user_ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userID"));
 
                     b.Property<string>("email")
                         .HasMaxLength(30)
@@ -192,31 +255,50 @@ namespace TrainTicketsWebsite.Migrations
                     b.Property<string>("userName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("user_ID");
+                    b.HasKey("userID");
 
                     b.ToTable("UsersInfo");
                 });
 
+            modelBuilder.Entity("TrainTicketsWebsite.Models.Bookings", b =>
+                {
+                    b.HasOne("TrainTicketsWebsite.Models.Seats", "Seats")
+                        .WithMany("Bookings")
+                        .HasForeignKey("seatID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TrainTicketsWebsite.Models.Users", "Users")
+                        .WithMany("Bookings")
+                        .HasForeignKey("userID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Seats");
+
+                    b.Navigation("Users");
+                });
+
             modelBuilder.Entity("TrainTicketsWebsite.Models.Cabins", b =>
                 {
-                    b.HasOne("TrainTicketsWebsite.Models.CarriagesDetailModel", "CarriagesDetailModel")
+                    b.HasOne("TrainTicketsWebsite.Models.Carriages", "Carriages")
                         .WithMany("Cabins")
                         .HasForeignKey("carriageID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CarriagesDetailModel");
+                    b.Navigation("Carriages");
                 });
 
-            modelBuilder.Entity("TrainTicketsWebsite.Models.CarriagesDetailModel", b =>
+            modelBuilder.Entity("TrainTicketsWebsite.Models.Carriages", b =>
                 {
-                    b.HasOne("TrainTicketsWebsite.Models.TrainsDetailModel", "TrainsDetailModel")
+                    b.HasOne("TrainTicketsWebsite.Models.Trains", "Trains")
                         .WithMany("Carriages")
                         .HasForeignKey("trainID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TrainsDetailModel");
+                    b.Navigation("Trains");
                 });
 
             modelBuilder.Entity("TrainTicketsWebsite.Models.Seats", b =>
@@ -230,15 +312,15 @@ namespace TrainTicketsWebsite.Migrations
                     b.Navigation("Cabins");
                 });
 
-            modelBuilder.Entity("TrainTicketsWebsite.Models.TrainsDetailModel", b =>
+            modelBuilder.Entity("TrainTicketsWebsite.Models.Trains", b =>
                 {
-                    b.HasOne("TrainTicketsWebsite.Models.StationsDetailModel", "StationsDetailModel")
+                    b.HasOne("TrainTicketsWebsite.Models.Stations", "Stations")
                         .WithMany("Trains")
                         .HasForeignKey("stationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("StationsDetailModel");
+                    b.Navigation("Stations");
                 });
 
             modelBuilder.Entity("TrainTicketsWebsite.Models.Cabins", b =>
@@ -246,19 +328,29 @@ namespace TrainTicketsWebsite.Migrations
                     b.Navigation("Seats");
                 });
 
-            modelBuilder.Entity("TrainTicketsWebsite.Models.CarriagesDetailModel", b =>
+            modelBuilder.Entity("TrainTicketsWebsite.Models.Carriages", b =>
                 {
                     b.Navigation("Cabins");
                 });
 
-            modelBuilder.Entity("TrainTicketsWebsite.Models.StationsDetailModel", b =>
+            modelBuilder.Entity("TrainTicketsWebsite.Models.Seats", b =>
+                {
+                    b.Navigation("Bookings");
+                });
+
+            modelBuilder.Entity("TrainTicketsWebsite.Models.Stations", b =>
                 {
                     b.Navigation("Trains");
                 });
 
-            modelBuilder.Entity("TrainTicketsWebsite.Models.TrainsDetailModel", b =>
+            modelBuilder.Entity("TrainTicketsWebsite.Models.Trains", b =>
                 {
                     b.Navigation("Carriages");
+                });
+
+            modelBuilder.Entity("TrainTicketsWebsite.Models.Users", b =>
+                {
+                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

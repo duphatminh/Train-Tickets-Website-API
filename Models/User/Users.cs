@@ -5,7 +5,7 @@ namespace TrainTicketsWebsite.Models;
 public class Users
 {
     [Key]
-    public int user_ID { get; set; }
+    public int userID { get; set; }
     public string userName { get; set; }
     [MaxLength(30)]
     public string email { get; set; }

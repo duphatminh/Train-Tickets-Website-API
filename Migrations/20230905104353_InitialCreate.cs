@@ -12,6 +12,22 @@ namespace TrainTicketsWebsite.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "PaymentsInfo",
+                columns: table => new
+                {
+                    paymentID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    paymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    creditCardNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    expirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    cvv = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PaymentsInfo", x => x.paymentID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "StationsInfo",
                 columns: table => new
                 {
@@ -29,7 +45,7 @@ namespace TrainTicketsWebsite.Migrations
                 name: "UsersInfo",
                 columns: table => new
                 {
-                    user_ID = table.Column<int>(type: "int", nullable: false)
+                    userID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     userName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
@@ -39,7 +55,7 @@ namespace TrainTicketsWebsite.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersInfo", x => x.user_ID);
+                    table.PrimaryKey("PK_UsersInfo", x => x.userID);
                 });
 
             migrationBuilder.CreateTable(
@@ -132,6 +148,47 @@ namespace TrainTicketsWebsite.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "BookingsInfo",
+                columns: table => new
+                {
+                    bookingID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    userID = table.Column<int>(type: "int", nullable: false),
+                    seatID = table.Column<int>(type: "int", nullable: false),
+                    departureStation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    arrivalStation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    departureTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    numberOfTickets = table.Column<int>(type: "int", nullable: false),
+                    totalPrice = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookingsInfo", x => x.bookingID);
+                    table.ForeignKey(
+                        name: "FK_BookingsInfo_SeatsInfo_seatID",
+                        column: x => x.seatID,
+                        principalTable: "SeatsInfo",
+                        principalColumn: "seatID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookingsInfo_UsersInfo_userID",
+                        column: x => x.userID,
+                        principalTable: "UsersInfo",
+                        principalColumn: "userID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookingsInfo_seatID",
+                table: "BookingsInfo",
+                column: "seatID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookingsInfo_userID",
+                table: "BookingsInfo",
+                column: "userID");
+
             migrationBuilder.CreateIndex(
                 name: "IX_CabinsInfo_carriageID",
                 table: "CabinsInfo",
@@ -156,6 +213,12 @@ namespace TrainTicketsWebsite.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BookingsInfo");
+
+            migrationBuilder.DropTable(
+                name: "PaymentsInfo");
+
             migrationBuilder.DropTable(
                 name: "SeatsInfo");
 

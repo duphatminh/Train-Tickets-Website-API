@@ -9,8 +9,8 @@ public class Bookings
     public int bookingID { get; set; }
     public int userID { get; set; }
     public int seatID { get; set; }
-    public int departureStation { get; set; }
-    public int arrivalStation { get; set; }
+    public string departureStation { get; set; }
+    public string arrivalStation { get; set; }
     public DateTime departureTime { get; set; }
     public int numberOfTickets { get; set; }
     public int totalPrice { get; set; }
